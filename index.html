@@ -9,14 +9,14 @@
         @import url('https://fonts.googleapis.com/css2?family=Teko:wght@600;700&family=Inter:wght@400;600;700;800&display=swap');
 
         :root {
-            --bg-main: #060907;
-            --bg-card: #0e140e;
-            --bg-card-hover: #151f15;
+            --bg-main: #050805;
+            --bg-card: rgba(14, 20, 14, 0.75);
+            --bg-card-hover: rgba(21, 31, 21, 0.85);
             --accent-green: #ccff00;
-            --accent-green-glow: rgba(204, 255, 0, 0.4);
+            --accent-green-glow: rgba(204, 255, 0, 0.35);
             --text-primary: #f1f5f9;
             --text-secondary: #829483;
-            --border-color: rgba(204, 255, 0, 0.12);
+            --border-color: rgba(204, 255, 0, 0.15);
             
             --gold: #ffd700;
             --silver: #e2e8f0;
@@ -30,7 +30,7 @@
             font-family: 'Inter', sans-serif;
         }
 
-        /* ФОН В СТИЛЕ ЗМЕИНОЙ ЛИГИ NEXORA */
+        /* УНИКАЛЬНЫЙ ИГРОВОЙ ФОН С ЭФФЕКТАМИ СВЕЧЕНИЯ И ВОДЯНОГО ЗНАКА */
         body {
             background-color: var(--bg-main);
             color: var(--text-primary);
@@ -40,12 +40,43 @@
             position: relative;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(204, 255, 0, 0.12) 0%, transparent 45%),
-                radial-gradient(circle at 90% 80%, rgba(204, 255, 0, 0.08) 0%, transparent 45%),
-                radial-gradient(circle at 50% 0%, rgba(204, 255, 0, 0.15) 0%, transparent 40%),
-                linear-gradient(rgba(204, 255, 0, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(204, 255, 0, 0.02) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 100% 100%, 45px 45px, 45px 45px;
+                /* Неоновые лучи и туман */
+                radial-gradient(circle at 80% 10%, rgba(204, 255, 0, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 10% 90%, rgba(204, 255, 0, 0.1) 0%, transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0) 0%, rgba(5, 8, 5, 0.8) 100%),
+                /* Матричная точечная текстура */
+                radial-gradient(rgba(204, 255, 0, 0.1) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 30px 30px;
+            background-attachment: fixed;
+        }
+
+        /* Абстрактные силуэты логотипа (змеи) на заднем плане */
+        body::before {
+            content: "\f8c9";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: fixed;
+            top: -100px;
+            right: -100px;
+            font-size: 45vw;
+            color: rgba(204, 255, 0, 0.02);
+            pointer-events: none;
+            z-index: 0;
+            transform: rotate(-15deg);
+        }
+
+        body::after {
+            content: "\f8c9";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: fixed;
+            bottom: -150px;
+            left: -100px;
+            font-size: 50vw;
+            color: rgba(204, 255, 0, 0.015);
+            pointer-events: none;
+            z-index: 0;
+            transform: rotate(160deg);
         }
 
         /* БОКОВЫЕ ДЕКОРАТИВНЫЕ ПАНЕЛИ */
@@ -57,7 +88,7 @@
             flex-direction: column;
             align-items: center;
             gap: 20px;
-            color: rgba(204, 255, 0, 0.2);
+            color: rgba(204, 255, 0, 0.25);
             font-family: 'Teko', sans-serif;
             font-size: 1.5rem;
             letter-spacing: 4px;
@@ -66,14 +97,14 @@
             z-index: 1;
         }
 
-        .side-decoration.left { left: 30px; }
-        .side-decoration.right { right: 30px; }
+        .side-decoration.left { left: 35px; }
+        .side-decoration.right { right: 35px; }
 
         .side-line {
             width: 2px;
-            height: 120px;
+            height: 140px;
             background: linear-gradient(180deg, transparent, var(--accent-green), transparent);
-            box-shadow: 0 0 10px var(--accent-green-glow);
+            box-shadow: 0 0 12px var(--accent-green-glow);
         }
 
         .side-text {
@@ -83,13 +114,13 @@
 
         /* HEADER */
         header {
-            background: rgba(8, 12, 8, 0.88);
-            backdrop-filter: blur(14px);
+            background: rgba(8, 12, 8, 0.85);
+            backdrop-filter: blur(16px);
             position: sticky;
             top: 0;
             z-index: 100;
             border-bottom: 1px solid var(--border-color);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.8);
         }
 
         .nav-container {
@@ -114,7 +145,7 @@
 
         .logo i {
             color: var(--accent-green);
-            filter: drop-shadow(0 0 10px var(--accent-green-glow));
+            filter: drop-shadow(0 0 12px var(--accent-green-glow));
         }
 
         .nav-links {
@@ -158,17 +189,17 @@
         .hero {
             text-align: center;
             margin-bottom: 35px;
-            padding: 35px 20px;
-            background: linear-gradient(180deg, rgba(204, 255, 0, 0.08) 0%, rgba(14, 20, 14, 0.5) 100%);
+            padding: 40px 20px;
+            background: linear-gradient(180deg, rgba(204, 255, 0, 0.08) 0%, rgba(14, 20, 14, 0.6) 100%);
             border-radius: 20px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
         }
 
         .hero h1 {
             font-family: 'Teko', sans-serif;
-            font-size: 3.4rem;
+            font-size: 3.5rem;
             letter-spacing: 3px;
             text-transform: uppercase;
             line-height: 1;
@@ -203,17 +234,18 @@
         /* TABLE WRAPPER */
         .card-wrapper {
             background: var(--bg-card);
+            backdrop-filter: blur(12px);
             border-radius: 16px;
             border: 1px solid var(--border-color);
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
         }
 
         .table-header {
             display: grid;
             grid-template-columns: 80px 1fr 100px 40px;
             padding: 14px 20px;
-            background: rgba(204, 255, 0, 0.02);
+            background: rgba(204, 255, 0, 0.03);
             font-weight: 700;
             color: var(--text-secondary);
             font-size: 0.75rem;
@@ -303,7 +335,7 @@
         .roster-container {
             max-height: 0;
             overflow: hidden;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.45);
             transition: max-height 0.4s ease-out, padding 0.3s ease;
             padding: 0 20px;
         }
@@ -370,11 +402,12 @@
         /* CARDS FOR NEWS AND RULES */
         .info-card {
             background: var(--bg-card);
+            backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 24px;
             margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             transition: transform 0.2s, border-color 0.2s;
         }
 
