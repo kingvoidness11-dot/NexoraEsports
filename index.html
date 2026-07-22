@@ -228,6 +228,7 @@
         .rank-1 { color: var(--gold); text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
         .rank-2 { color: var(--silver); }
         .rank-3 { color: var(--bronze); }
+        .rank-other { color: var(--text-secondary); }
 
         .team-title {
             display: flex;
@@ -494,7 +495,7 @@
                     </div>
                 </div>
 
-                <!-- ACADEMIES -->
+                <!-- RANK 2: ACADEMY 1 -->
                 <div class="team-item" onclick="toggleRoster(this)">
                     <div class="team-row">
                         <div class="rank-badge rank-2"><i class="fa-solid fa-medal"></i> #2</div>
@@ -504,10 +505,34 @@
                     </div>
                     <div class="roster-container"><div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Состав в процессе анонса</div></div>
                 </div>
+
+                <!-- RANK 3: ACADEMY 2 -->
                 <div class="team-item" onclick="toggleRoster(this)">
                     <div class="team-row">
                         <div class="rank-badge rank-3"><i class="fa-solid fa-award"></i> #3</div>
                         <div class="team-title"><span class="team-dot" style="color:#ff2a5f; background:#ff2a5f;"></span> Nexora Academy 2 🔴</div>
+                        <div><span class="status-pill">OPEN</span></div>
+                        <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
+                    </div>
+                    <div class="roster-container"><div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Состав в процессе анонса</div></div>
+                </div>
+
+                <!-- RANK 4: ACADEMY 3 -->
+                <div class="team-item" onclick="toggleRoster(this)">
+                    <div class="team-row">
+                        <div class="rank-badge rank-other">#4</div>
+                        <div class="team-title"><span class="team-dot" style="color:#ffa500; background:#ffa500;"></span> Nexora Academy 3 🟡</div>
+                        <div><span class="status-pill">OPEN</span></div>
+                        <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
+                    </div>
+                    <div class="roster-container"><div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Состав в процессе анонса</div></div>
+                </div>
+
+                <!-- RANK 5: ACADEMY 4 -->
+                <div class="team-item" onclick="toggleRoster(this)">
+                    <div class="team-row">
+                        <div class="rank-badge rank-other">#5</div>
+                        <div class="team-title"><span class="team-dot" style="color:#9932cc; background:#9932cc;"></span> Nexora Academy 4 🟣</div>
                         <div><span class="status-pill">OPEN</span></div>
                         <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
                     </div>
