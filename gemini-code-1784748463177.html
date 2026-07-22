@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexora League - Ranking & Rosters</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0b0e14;
+            --bg-secondary: #151922;
+            --bg-card: #1c222d;
+            --accent-green: #28a745;
+            --accent-red: #ff3366;
+            --text-main: #f0f4f8;
+            --text-muted: #8a99ad;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --gold: #ffd700;
+            --silver: #c0c0c0;
+            --bronze: #cd7f32;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        header {
+            background: rgba(21, 25, 34, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .logo i { color: var(--accent-red); }
+
+        .nav-links { display: flex; gap: 10px; }
+
+        .nav-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-btn.active, .nav-btn:hover {
+            background: var(--accent-red);
+            color: #fff;
+            border-color: var(--accent-red);
+            box-shadow: 0 0 12px rgba(255, 51, 102, 0.4);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+
+        .hero h1 span { color: var(--accent-red); }
+
+        .section-content { display: none; }
+        .section-content.active { display: block; }
+
+        .card-wrapper {
+            background: var(--bg-secondary);
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .table-header {
+            display: grid;
+            grid-template-columns: 70px 1fr 90px 40px;
+            padding: 15px 20px;
+            background: var(--bg-card);
+            font-weight: 700;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .team-item {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .team-row {
+            display: grid;
+            grid-template-columns: 70px 1fr 90px 40px;
+            align-items: center;
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .team-row:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .rank { font-weight: 800; font-size: 1.1rem; }
+        .rank-1 { color: var(--gold); }
+        .rank-2 { color: var(--silver); }
+        .rank-3 { color: var(--bronze); }
+
+        .team-info { display: flex; align-items: center; gap: 12px; font-weight: 700; }
+        .team-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+        .status-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .chevron {
+            color: var(--text-muted);
+            transition: transform 0.3s ease;
+            text-align: right;
+        }
+
+        .team-item.open .chevron {
+            transform: rotate(180deg);
+            color: var(--accent-red);
+        }
+
+        /* Dropdown Rosters */
+        .roster-container {
+            max-height: 0;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.2);
+            transition: max-height 0.4s ease-out;
+            padding: 0 20px;
+        }
+
+        .team-item.open .roster-container {
+            max-height: 1000px;
+            padding: 20px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .roster-section-title {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 15px 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+
+        .roster-section-title:first-child { margin-top: 0; }
+        .roster-section-title.bench { color: var(--accent-red); }
+
+        /* Roster Table Styling */
+        .roster-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .roster-table th {
+            text-align: left;
+            padding: 8px 12px;
+            color: var(--text-muted);
+            background: var(--bg-card);
+            font-weight: 600;
+            font-size: 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .roster-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .roster-table tr:last-child td { border-bottom: none; }
+
+        .player-nick { font-weight: 700; color: #fff; }
+
+        .info-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .info-card h3 { color: var(--accent-red); margin-bottom: 10px; }
+        .info-card p { color: var(--text-muted); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo"><i class="fa-solid fa-flag"></i> Nexora League</div>
+            <div class="nav-links">
+                <button class="nav-btn active" onclick="switchTab('ranking')">Рейтинг</button>
+                <button class="nav-btn" onclick="switchTab('rules')">Правила</button>
+                <button class="nav-btn" onclick="switchTab('news')">Новости</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <h1>Nexora <span>League</span></h1>
+            <p>Нажмите на команду, чтобы открыть её полный состав</p>
+        </div>
+
+        <!-- RANKING SECTION -->
+        <div id="ranking" class="section-content active">
+            <div class="card-wrapper">
+                <div class="table-header">
+                    <div>Ранг</div>
+                    <div>Команда</div>
+                    <div>Статус</div>
+                    <div></div>
+                </div>
+
+                <!-- 1 PLACE: NEXORA TEAM -->
+                <div class="team-item" onclick="toggleRoster(this)">
+                    <div class="team-row">
+                        <div class="rank rank-1"><i class="fa-solid fa-trophy"></i> 1</div>
+                        <div class="team-info">
+                            <span class="team-dot" style="background: var(--accent-green);"></span> 🟢 NEXORA TEAM 🟢
+                        </div>
+                        <div><span class="status-tag">OPEN</span></div>
+                        <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
+                    </div>
+                    <div class="roster-container">
+                        <div class="roster-section-title">Основной состав NEXORA TEAM</div>
+                        <table class="roster-table">
+                            <thead>
+                                <tr>
+                                    <th>Игрок</th>
+                                    <th>Возраст</th>
+                                    <th>Национальность</th>
+                                    <th>Роль</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="player-nick">Pike</td>
+                                    <td>20</td>
+                                    <td>Украина 🇺🇦</td>
+                                    <td>Entry</td>
+                                </tr>
+                                <tr>
+                                    <td class="player-nick">Tur1kxx</td>
+                                    <td>15</td>
+                                    <td>Украина 🇺🇦</td>
+                                    <td>Rifler</td>
+                                </tr>
+                                <tr>
+                                    <td class="player-nick">Void</td>
+                                    <td>15</td>
+                                    <td>Казахстан 🇰🇿</td>
+                                    <td>Awp/Igl</td>
+                                </tr>
+                                <tr>
+                                    <td class="player-nick">maTTe0qq</td>
+                                    <td>15</td>
+                                    <td>Украина 🇺🇦</td>
+                                    <td>Lurker</td>
+                                </tr>
+                                <tr>
+                                    <td class="player-nick">kiyo666</td>
+                                    <td>17</td>
+                                    <td>Россия 🇷🇺</td>
+                                    <td>Support</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="roster-section-title bench">Скамейка запасных</div>
+                        <table class="roster-table">
+                            <thead>
+                                <tr>
+                                    <th>Игрок</th>
+                                    <th>Возраст</th>
+                                    <th>Национальность</th>
+                                    <th>Роль</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="player-nick">Zeln</td>
+                                    <td>15</td>
+                                    <td>Украина 🇺🇦</td>
+                                    <td>Lurker (замена)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 2 PLACE: ACADEMY 1 -->
+                <div class="team-item" onclick="toggleRoster(this)">
+                    <div class="team-row">
+                        <div class="rank rank-2"><i class="fa-solid fa-medal"></i> 2</div>
+                        <div class="team-info">
+                            <span class="team-dot" style="background:#007bff;"></span> Nexora Academy 1 🔵
+                        </div>
+                        <div><span class="status-tag">OPEN</span></div>
+                        <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
+                    </div>
+                    <div class="roster-container">
+                        <div class="roster-section-title">Состав уточняется...</div>
+                    </div>
+                </div>
+
+                <!-- 3 PLACE: ACADEMY 2 -->
+                <div class="team-item" onclick="toggleRoster(this)">
+                    <div class="team-row">
+                        <div class="rank rank-3"><i class="fa-solid fa-award"></i> 3</div>
+                        <div class="team-info">
+                            <span class="team-dot" style="background:#dc3545;"></span> Nexora Academy 2 🔴
+                        </div>
+                        <div><span class="status-tag">OPEN</span></div>
+                        <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
+                    </div>
+                    <div class="roster-container">
+                        <div class="roster-section-title">Состав уточняется...</div>
+                    </div>
+                </div>
+
+                <!-- 4 PLACE -->
+                <div class="team-item" onclick="toggleRoster(this)">
+                    <div class="team-row">
+                        <div class="rank">4</div>
+                        <div class="team-info">
+                            <span class="team-dot" style="background:#6f42c1;"></span> Nexora Academy 3 🟣
+                        </div>
+                        <div><span class="status-tag">OPEN</span></div>
+                        <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
+                    </div>
+                    <div class="roster-container">
+                        <div class="roster-section-title">Состав уточняется...</div>
+                    </div>
+                </div>
+
+                <!-- 5 PLACE -->
+                <div class="team-item" onclick="toggleRoster(this)">
+                    <div class="team-row">
+                        <div class="rank">5</div>
+                        <div class="team-info">
+                            <span class="team-dot" style="background:#ffc107;"></span> Nexora Academy 4 🟡
+                        </div>
+                        <div><span class="status-tag">OPEN</span></div>
+                        <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
+                    </div>
+                    <div class="roster-container">
+                        <div class="roster-section-title">Состав уточняется...</div>
+                    </div>
+                </div>
+
+                <!-- 6 PLACE -->
+                <div class="team-item" onclick="toggleRoster(this)">
+                    <div class="team-row">
+                        <div class="rank">6</div>
+                        <div class="team-info">
+                            <span class="team-dot" style="background:#fd7e14;"></span> Nexora Academy 5 🟠
+                        </div>
+                        <div><span class="status-tag">OPEN</span></div>
+                        <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
+                    </div>
+                    <div class="roster-container">
+                        <div class="roster-section-title">Состав уточняется...</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- RULES SECTION -->
+        <div id="rules" class="section-content">
+            <div class="info-card">
+                <h3><i class="fa-solid fa-shield-halved"></i> Правила рейтинга NEXORA</h3>
+                <p>Регламент и правила начисления очков в лиге.</p>
+            </div>
+        </div>
+
+        <!-- NEWS SECTION -->
+        <div id="news" class="section-content">
+            <div class="info-card">
+                <h3><i class="fa-solid fa-bullhorn"></i> Новости Nexora Team</h3>
+                <p>Официальные изменения и анонсы команд.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.section-content').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        function toggleRoster(element) {
+            element.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
