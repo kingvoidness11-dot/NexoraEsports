@@ -3,40 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexora League - Ranking & Rosters</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Nexora Esports — Ranking & Rosters</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Teko:wght@600;700&family=Inter:wght@400;600;700;800&display=swap');
+
         :root {
-            --bg-primary: #0b0e14;
-            --bg-secondary: #151922;
-            --bg-card: #1c222d;
-            --accent-green: #28a745;
-            --accent-red: #ff3366;
-            --text-main: #f0f4f8;
-            --text-muted: #8a99ad;
-            --border-color: rgba(255, 255, 255, 0.08);
+            --bg-main: #0a0d14;
+            --bg-card: #121722;
+            --bg-card-hover: #18202e;
+            --accent-red: #ff2a5f;
+            --accent-red-glow: rgba(255, 42, 95, 0.4);
+            --accent-green: #00e676;
+            --accent-green-glow: rgba(0, 230, 118, 0.3);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.07);
+            
             --gold: #ffd700;
-            --silver: #c0c0c0;
-            --bronze: #cd7f32;
+            --silver: #e2e8f0;
+            --bronze: #d97706;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            background-color: var(--bg-primary);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding-bottom: 50px;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.5;
+            padding-bottom: 60px;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(255, 42, 95, 0.12), transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(0, 230, 118, 0.05), transparent 30%);
+            min-height: 100vh;
         }
 
+        /* HEADER */
         header {
-            background: rgba(21, 25, 34, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 13, 20, 0.85);
+            backdrop-filter: blur(12px);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -49,114 +59,195 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
+            padding: 16px 20px;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.2rem;
-            font-weight: 800;
+            gap: 12px;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
+            color: #fff;
         }
 
-        .logo i { color: var(--accent-red); }
+        .logo i {
+            color: var(--accent-red);
+            filter: drop-shadow(0 0 8px var(--accent-red-glow));
+        }
 
-        .nav-links { display: flex; gap: 10px; }
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 4px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
 
         .nav-btn {
             background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            padding: 8px 16px;
+            border: none;
+            color: var(--text-secondary);
+            padding: 8px 18px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
-            transition: 0.3s;
+            font-size: 0.85rem;
+            transition: all 0.25s ease;
         }
 
         .nav-btn.active, .nav-btn:hover {
             background: var(--accent-red);
             color: #fff;
-            border-color: var(--accent-red);
-            box-shadow: 0 0 12px rgba(255, 51, 102, 0.4);
+            box-shadow: 0 0 15px var(--accent-red-glow);
         }
 
+        /* LAYOUT CONTAINER */
         .container {
             max-width: 1000px;
             margin: 30px auto;
             padding: 0 20px;
         }
 
+        /* HERO SECTION */
         .hero {
             text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
+            margin-bottom: 35px;
+            padding: 30px 20px;
+            background: linear-gradient(180deg, rgba(255, 42, 95, 0.08) 0%, rgba(18, 23, 34, 0) 100%);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
         }
 
-        .hero h1 span { color: var(--accent-red); }
+        .hero h1 {
+            font-family: 'Teko', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
 
-        .section-content { display: none; }
-        .section-content.active { display: block; }
+        .hero h1 span {
+            color: var(--accent-red);
+            text-shadow: 0 0 20px var(--accent-red-glow);
+        }
 
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* SECTIONS ANIMATION */
+        .section-content {
+            display: none;
+            animation: slideUp 0.35s ease forwards;
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* TABLE WRAPPER */
         .card-wrapper {
-            background: var(--bg-secondary);
-            border-radius: 14px;
+            background: var(--bg-card);
+            border-radius: 16px;
             border: 1px solid var(--border-color);
             overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
         .table-header {
             display: grid;
-            grid-template-columns: 70px 1fr 90px 40px;
-            padding: 15px 20px;
-            background: var(--bg-card);
+            grid-template-columns: 80px 1fr 100px 40px;
+            padding: 14px 20px;
+            background: rgba(255, 255, 255, 0.02);
             font-weight: 700;
-            color: var(--text-muted);
-            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--border-color);
         }
 
+        /* TEAM ACCORDION ITEM */
         .team-item {
             border-bottom: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .team-item:last-child {
+            border-bottom: none;
         }
 
         .team-row {
             display: grid;
-            grid-template-columns: 70px 1fr 90px 40px;
+            grid-template-columns: 80px 1fr 100px 40px;
             align-items: center;
-            padding: 16px 20px;
+            padding: 18px 20px;
             cursor: pointer;
             transition: background 0.2s;
         }
 
         .team-row:hover {
-            background: rgba(255, 255, 255, 0.04);
+            background: var(--bg-card-hover);
         }
 
-        .rank { font-weight: 800; font-size: 1.1rem; }
-        .rank-1 { color: var(--gold); }
+        .rank-badge {
+            font-family: 'Teko', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .rank-1 { color: var(--gold); text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
         .rank-2 { color: var(--silver); }
         .rank-3 { color: var(--bronze); }
+        .rank-other { color: var(--text-secondary); }
 
-        .team-info { display: flex; align-items: center; gap: 12px; font-weight: 700; }
-        .team-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
-
-        .status-tag {
-            font-size: 0.75rem;
+        .team-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             font-weight: 700;
-            padding: 3px 8px;
-            border-radius: 4px;
-            background: rgba(255, 255, 255, 0.06);
-            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .team-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px currentColor;
+        }
+
+        .status-pill {
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(0, 230, 118, 0.1);
+            color: var(--accent-green);
+            border: 1px solid rgba(0, 230, 118, 0.25);
             text-align: center;
+            letter-spacing: 0.5px;
         }
 
         .chevron {
-            color: var(--text-muted);
+            color: var(--text-secondary);
             transition: transform 0.3s ease;
             text-align: right;
+            font-size: 0.85rem;
         }
 
         .team-item.open .chevron {
@@ -164,77 +255,140 @@
             color: var(--accent-red);
         }
 
-        /* Dropdown Rosters */
+        /* ROSTER CONTAINER */
         .roster-container {
             max-height: 0;
             overflow: hidden;
-            background: rgba(0, 0, 0, 0.2);
-            transition: max-height 0.4s ease-out;
+            background: rgba(0, 0, 0, 0.3);
+            transition: max-height 0.4s ease-out, padding 0.3s ease;
             padding: 0 20px;
         }
 
         .team-item.open .roster-container {
-            max-height: 1000px;
-            padding: 20px;
-            border-top: 1px dashed var(--border-color);
+            max-height: 1200px;
+            padding: 24px 20px;
+            border-top: 1px solid var(--border-color);
         }
 
         .roster-section-title {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin: 15px 0 10px 0;
+            font-size: 0.8rem;
+            color: var(--accent-red);
+            margin: 18px 0 10px 0;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 700;
+            letter-spacing: 1.5px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .roster-section-title:first-child { margin-top: 0; }
-        .roster-section-title.bench { color: var(--accent-red); }
 
-        /* Roster Table Styling */
+        /* ROSTER TABLES */
         .roster-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
+            background: rgba(255, 255, 255, 0.015);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
         }
 
         .roster-table th {
             text-align: left;
-            padding: 8px 12px;
-            color: var(--text-muted);
-            background: var(--bg-card);
-            font-weight: 600;
-            font-size: 0.8rem;
-            border-bottom: 1px solid var(--border-color);
+            padding: 10px 14px;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
         }
 
         .roster-table td {
-            padding: 10px 12px;
+            padding: 12px 14px;
             border-bottom: 1px solid var(--border-color);
         }
 
         .roster-table tr:last-child td { border-bottom: none; }
 
-        .player-nick { font-weight: 700; color: #fff; }
-
-        .info-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
+        .player-nick {
+            font-weight: 700;
+            color: #fff;
         }
 
-        .info-card h3 { color: var(--accent-red); margin-bottom: 10px; }
-        .info-card p { color: var(--text-muted); }
+        .player-role {
+            color: var(--accent-red);
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        /* CARDS FOR NEWS AND RULES */
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .info-card:hover {
+            border-color: rgba(255, 42, 95, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .info-card h3 {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-card h3 i {
+            color: var(--accent-red);
+        }
+
+        .info-card p, .info-card ul {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        .rules-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .rules-list li {
+            position: relative;
+            padding-left: 26px;
+            margin-bottom: 12px;
+        }
+
+        .rules-list li::before {
+            content: "\f054";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: var(--accent-red);
+            font-size: 0.75rem;
+            position: absolute;
+            left: 0;
+            top: 3px;
+        }
     </style>
 </head>
 <body>
 
+    <!-- HEADER NAVIGATION -->
     <header>
         <div class="nav-container">
-            <div class="logo"><i class="fa-solid fa-flag"></i> Nexora League</div>
+            <div class="logo">
+                <i class="fa-solid fa-flag-checkered"></i> Nexora League
+            </div>
             <div class="nav-links">
                 <button class="nav-btn active" onclick="switchTab('ranking')">Рейтинг</button>
                 <button class="nav-btn" onclick="switchTab('rules')">Правила</button>
@@ -244,12 +398,13 @@
     </header>
 
     <div class="container">
+        <!-- HERO HEADLINE -->
         <div class="hero">
             <h1>Nexora <span>League</span></h1>
-            <p>Нажмите на команду, чтобы открыть её полный состав</p>
+            <p>Официальный рейтинг команд и составы лиги. Кликните на команду для просмотра ростера.</p>
         </div>
 
-        <!-- RANKING SECTION -->
+        <!-- TAB 1: RANKING & ROSTERS -->
         <div id="ranking" class="section-content active">
             <div class="card-wrapper">
                 <div class="table-header">
@@ -259,24 +414,24 @@
                     <div></div>
                 </div>
 
-                <!-- 1 PLACE: NEXORA TEAM -->
+                <!-- RANK 1: NEXORA TEAM -->
                 <div class="team-item" onclick="toggleRoster(this)">
                     <div class="team-row">
-                        <div class="rank rank-1"><i class="fa-solid fa-trophy"></i> 1</div>
-                        <div class="team-info">
-                            <span class="team-dot" style="background: var(--accent-green);"></span> 🟢 NEXORA TEAM 🟢
+                        <div class="rank-badge rank-1"><i class="fa-solid fa-trophy"></i> #1</div>
+                        <div class="team-title">
+                            <span class="team-dot" style="color:#00e676; background:#00e676;"></span> NEXORA TEAM 🟢
                         </div>
-                        <div><span class="status-tag">OPEN</span></div>
+                        <div><span class="status-pill">OPEN</span></div>
                         <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
                     </div>
                     <div class="roster-container">
-                        <div class="roster-section-title">Основной состав NEXORA TEAM</div>
+                        <div class="roster-section-title"><i class="fa-solid fa-users"></i> Основной состав NEXORA TEAM</div>
                         <table class="roster-table">
                             <thead>
                                 <tr>
                                     <th>Игрок</th>
                                     <th>Возраст</th>
-                                    <th>Национальность</th>
+                                    <th>Страна</th>
                                     <th>Роль</th>
                                 </tr>
                             </thead>
@@ -285,42 +440,42 @@
                                     <td class="player-nick">Pike</td>
                                     <td>20</td>
                                     <td>Украина 🇺🇦</td>
-                                    <td>Entry</td>
+                                    <td class="player-role">Entry</td>
                                 </tr>
                                 <tr>
                                     <td class="player-nick">Tur1kxx</td>
                                     <td>15</td>
                                     <td>Украина 🇺🇦</td>
-                                    <td>Rifler</td>
+                                    <td class="player-role">Rifler</td>
                                 </tr>
                                 <tr>
                                     <td class="player-nick">Void</td>
                                     <td>15</td>
                                     <td>Казахстан 🇰🇿</td>
-                                    <td>Awp/Igl</td>
+                                    <td class="player-role">AWP / IGL</td>
                                 </tr>
                                 <tr>
                                     <td class="player-nick">maTTe0qq</td>
                                     <td>15</td>
                                     <td>Украина 🇺🇦</td>
-                                    <td>Lurker</td>
+                                    <td class="player-role">Lurker</td>
                                 </tr>
                                 <tr>
                                     <td class="player-nick">kiyo666</td>
                                     <td>17</td>
                                     <td>Россия 🇷🇺</td>
-                                    <td>Support</td>
+                                    <td class="player-role">Support</td>
                                 </tr>
                             </tbody>
                         </table>
 
-                        <div class="roster-section-title bench">Скамейка запасных</div>
+                        <div class="roster-section-title" style="color: var(--text-secondary); margin-top: 20px;"><i class="fa-solid fa-chair"></i> Скамейка запасных</div>
                         <table class="roster-table">
                             <thead>
                                 <tr>
                                     <th>Игрок</th>
                                     <th>Возраст</th>
-                                    <th>Национальность</th>
+                                    <th>Страна</th>
                                     <th>Роль</th>
                                 </tr>
                             </thead>
@@ -329,112 +484,130 @@
                                     <td class="player-nick">Zeln</td>
                                     <td>15</td>
                                     <td>Украина 🇺🇦</td>
-                                    <td>Lurker (замена)</td>
+                                    <td class="player-role">Lurker (Замена)</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- 2 PLACE: ACADEMY 1 -->
+                <!-- RANK 2: ACADEMY 1 -->
                 <div class="team-item" onclick="toggleRoster(this)">
                     <div class="team-row">
-                        <div class="rank rank-2"><i class="fa-solid fa-medal"></i> 2</div>
-                        <div class="team-info">
-                            <span class="team-dot" style="background:#007bff;"></span> Nexora Academy 1 🔵
+                        <div class="rank-badge rank-2"><i class="fa-solid fa-medal"></i> #2</div>
+                        <div class="team-title">
+                            <span class="team-dot" style="color:#007bff; background:#007bff;"></span> Nexora Academy 1 🔵
                         </div>
-                        <div><span class="status-tag">OPEN</span></div>
+                        <div><span class="status-pill">OPEN</span></div>
                         <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
                     </div>
                     <div class="roster-container">
-                        <div class="roster-section-title">Состав уточняется...</div>
+                        <div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Состав в процессе анонса</div>
                     </div>
                 </div>
 
-                <!-- 3 PLACE: ACADEMY 2 -->
+                <!-- RANK 3: ACADEMY 2 -->
                 <div class="team-item" onclick="toggleRoster(this)">
                     <div class="team-row">
-                        <div class="rank rank-3"><i class="fa-solid fa-award"></i> 3</div>
-                        <div class="team-info">
-                            <span class="team-dot" style="background:#dc3545;"></span> Nexora Academy 2 🔴
+                        <div class="rank-badge rank-3"><i class="fa-solid fa-award"></i> #3</div>
+                        <div class="team-title">
+                            <span class="team-dot" style="color:#ff2a5f; background:#ff2a5f;"></span> Nexora Academy 2 🔴
                         </div>
-                        <div><span class="status-tag">OPEN</span></div>
+                        <div><span class="status-pill">OPEN</span></div>
                         <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
                     </div>
                     <div class="roster-container">
-                        <div class="roster-section-title">Состав уточняется...</div>
+                        <div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Состав в процессе анонса</div>
                     </div>
                 </div>
 
-                <!-- 4 PLACE -->
+                <!-- RANK 4: ACADEMY 3 -->
                 <div class="team-item" onclick="toggleRoster(this)">
                     <div class="team-row">
-                        <div class="rank">4</div>
-                        <div class="team-info">
-                            <span class="team-dot" style="background:#6f42c1;"></span> Nexora Academy 3 🟣
+                        <div class="rank-badge rank-other">#4</div>
+                        <div class="team-title">
+                            <span class="team-dot" style="color:#a855f7; background:#a855f7;"></span> Nexora Academy 3 🟣
                         </div>
-                        <div><span class="status-tag">OPEN</span></div>
+                        <div><span class="status-pill">OPEN</span></div>
                         <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
                     </div>
                     <div class="roster-container">
-                        <div class="roster-section-title">Состав уточняется...</div>
+                        <div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Состав в процессе анонса</div>
                     </div>
                 </div>
 
-                <!-- 5 PLACE -->
+                <!-- RANK 5: ACADEMY 4 -->
                 <div class="team-item" onclick="toggleRoster(this)">
                     <div class="team-row">
-                        <div class="rank">5</div>
-                        <div class="team-info">
-                            <span class="team-dot" style="background:#ffc107;"></span> Nexora Academy 4 🟡
+                        <div class="rank-badge rank-other">#5</div>
+                        <div class="team-title">
+                            <span class="team-dot" style="color:#eab308; background:#eab308;"></span> Nexora Academy 4 🟡
                         </div>
-                        <div><span class="status-tag">OPEN</span></div>
+                        <div><span class="status-pill">OPEN</span></div>
                         <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
                     </div>
                     <div class="roster-container">
-                        <div class="roster-section-title">Состав уточняется...</div>
+                        <div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Состав в процессе анонса</div>
                     </div>
                 </div>
 
-                <!-- 6 PLACE -->
+                <!-- RANK 6: ACADEMY 5 -->
                 <div class="team-item" onclick="toggleRoster(this)">
                     <div class="team-row">
-                        <div class="rank">6</div>
-                        <div class="team-info">
-                            <span class="team-dot" style="background:#fd7e14;"></span> Nexora Academy 5 🟠
+                        <div class="rank-badge rank-other">#6</div>
+                        <div class="team-title">
+                            <span class="team-dot" style="color:#f97316; background:#f97316;"></span> Nexora Academy 5 🟠
                         </div>
-                        <div><span class="status-tag">OPEN</span></div>
+                        <div><span class="status-pill">OPEN</span></div>
                         <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
                     </div>
                     <div class="roster-container">
-                        <div class="roster-section-title">Состав уточняется...</div>
+                        <div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Состав в процессе анонса</div>
                     </div>
                 </div>
 
             </div>
         </div>
 
-        <!-- RULES SECTION -->
+        <!-- TAB 2: RULES -->
         <div id="rules" class="section-content">
             <div class="info-card">
-                <h3><i class="fa-solid fa-shield-halved"></i> Правила рейтинга NEXORA</h3>
-                <p>Регламент и правила начисления очков в лиге.</p>
+                <h3><i class="fa-solid fa-shield-halved"></i> Правила рейтинга NEXORA LEAGUE</h3>
+                <br>
+                <ul class="rules-list">
+                    <li>Все официальные матчи фиксируются администрацией лиги. За каждую победу команда получает очки рейтинга.</li>
+                    <li>Игроки основного состава обязаны придерживаться дисциплинарного регламента лиги.</li>
+                    <li>Переходы (трансферы) между Академией и Основным составом разрешены только во время официальных трансферных окон.</li>
+                    <li>Использование неспортивного поведения или стороннего ПО приводит к дисквалификации всей команды.</li>
+                </ul>
             </div>
         </div>
 
-        <!-- NEWS SECTION -->
+        <!-- TAB 3: NEWS -->
         <div id="news" class="section-content">
             <div class="info-card">
-                <h3><i class="fa-solid fa-bullhorn"></i> Новости Nexora Team</h3>
-                <p>Официальные изменения и анонсы команд.</p>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span class="status-pill" style="background: rgba(255, 42, 95, 0.15); color: var(--accent-red); border-color: rgba(255, 42, 95, 0.3);">
+                        🔥 ОФИЦИАЛЬНО
+                    </span>
+                    <span style="font-size: 0.8rem; color: var(--text-secondary);">
+                        <i class="fa-regular fa-calendar"></i> 23 Июля 2026
+                    </span>
+                </div>
+                <h3><i class="fa-solid fa-bullhorn"></i> Формирование обновленного состава NEXORA TEAM</h3>
+                <p>
+                    Официально утвержден основной ростер <strong>NEXORA TEAM</strong> на текущий сезон. Капитаном и игроком позиции AWP назначена позиция <strong>Void</strong>. Игрок <strong>Zeln</strong> переведен на скамейку запасных.
+                </p>
             </div>
         </div>
     </div>
 
+    <!-- JAVASCRIPT FOR INTERACTION -->
     <script>
         function switchTab(tabId) {
             document.querySelectorAll('.section-content').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            
             document.getElementById(tabId).classList.add('active');
             event.currentTarget.classList.add('active');
         }
