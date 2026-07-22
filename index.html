@@ -896,33 +896,70 @@
             </div>
         </div>
 
-        <!-- TAB 3: NEWS -->
-        <div id="news" class="section-content">
-            <!-- БАННЕР ПОДПИСКИ НА PUSH -->
-            <div class="subscribe-banner">
-                <div class="subscribe-info">
-                    <h4><i class="fa-solid fa-bell"></i> Push-уведомления</h4>
-                    <p>Подпишитесь, чтобы моментально получать анонсы прямо на свой экран.</p>
-                </div>
-                <button class="subscribe-btn" id="mainSubBtn" onclick="openSubscribeModal()">
-                    <i class="fa-solid fa-bell-concierge"></i> Настроить подписку
-                </button>
-            </div>
+       <!-- TAB 3: NEWS -->
+<div id="news" class="section-content">
+    <!-- 1. БАННЕР ПОДПИСКИ -->
+    <div class="subscribe-banner">
+        <div class="subscribe-info">
+            <h4><i class="fa-solid fa-bell"></i> Push-уведомления</h4>
+            <p>Подпишитесь, чтобы моментально получать анонсы прямо на свой экран.</p>
+        </div>
+        <button class="subscribe-btn" id="mainSubBtn" onclick="openSubscribeModal()">
+            <i class="fa-solid fa-bell-concierge"></i> Настроить подписку
+        </button>
+    </div>
 
-            <div class="info-card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                    <span class="status-pill" style="background: rgba(204, 255, 0, 0.15); color: var(--accent-green); border-color: rgba(204, 255, 0, 0.3);">
-                        🔥 ОФИЦИАЛЬНО
-                    </span>
-                    <span style="font-size: 0.8rem; color: var(--text-secondary);">
-                        <i class="fa-regular fa-calendar"></i> 23 Июля 2026
-                    </span>
-                </div>
-                <h3><i class="fa-solid fa-bullhorn"></i> Формирование обновленного состава NEXORA TEAM</h3>
-                <p>
-                    Официально утвержден основной ростер <strong>NEXORA TEAM</strong> на текущий сезон. Капитаном и игроком позиции AWP назначена позиция <strong>Void</strong>. Игрок <strong>Zeln</strong> переведен на скамейку запасных.
-                </p>
+    <!-- КОНТЕЙНЕР ДЛЯ ВСЕХ НОВОСТЕЙ -->
+    <div id="newsContainer">
+
+        <!-- 2. СВЕЖАЯ НОВОСТЬ: ПОИСК ЗАПАСНОГО ИГРОКА (СРАЗУ ПОД БАННЕРОМ) -->
+        <div class="info-card" style="border-color: rgba(204, 255, 0, 0.4);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span class="status-pill" style="background: rgba(204, 255, 0, 0.15); color: var(--accent-green); border-color: rgba(204, 255, 0, 0.3);">
+                    ⚠️ ПОИСК ИГРОКА
+                </span>
+                <span style="font-size: 0.8rem; color: var(--text-secondary);">
+                    <i class="fa-regular fa-calendar"></i> 23 Июля 2026
+                </span>
             </div>
+            <h3><i class="fa-solid fa-user-plus"></i> NEXORA TEAM объявляет поиск запасного игрока!</h3>
+            <p>
+                Основной состав <strong>NEXORA TEAM</strong> открывает набор на позицию <strong>запасного игрока (6th player / Stand-in)</strong>.
+            </p>
+            <br>
+            <div style="background: rgba(204, 255, 0, 0.03); border: 1px dashed var(--border-color); padding: 14px; border-radius: 10px;">
+                <strong style="color: #fff; font-size: 0.9rem;">Требования к кандидатам:</strong>
+                <ul class="rules-list" style="margin-top: 8px;">
+                    <li>Адекватность, высокая дисциплина и готовность к тренировкам.</li>
+                    <li>Понимание своей роли и коммуникация на высоком уровне.</li>
+                    <li>Готовность выйти на замену в официальных матчах лиги.</li>
+                </ul>
+            </div>
+            <br>
+            <p style="font-size: 0.88rem; color: var(--text-secondary);">
+                📩 Для подачи заявки пишите в наш <a href="https://dsc.gg/nexora-esports" target="_blank" style="color: var(--accent-green); text-decoration: underline;">Discord</a> или в личные сообщения администрации.
+            </p>
+        </div>
+
+        <!-- 3. ПРЕДЫДУЩАЯ НОВОСТЬ -->
+        <div class="info-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span class="status-pill" style="background: rgba(204, 255, 0, 0.15); color: var(--accent-green); border-color: rgba(204, 255, 0, 0.3);">
+                    🔥 ОФИЦИАЛЬНО
+                </span>
+                <span style="font-size: 0.8rem; color: var(--text-secondary);">
+                    <i class="fa-regular fa-calendar"></i> 23 Июля 2026
+                </span>
+            </div>
+            <h3><i class="fa-solid fa-bullhorn"></i> Формирование обновленного состава NEXORA TEAM</h3>
+            <p>
+                Официально утвержден основной ростер <strong>NEXORA TEAM</strong> на текущий сезон. Капитаном и игроком позиции AWP назначена позиция <strong>Void</strong>. Игрок <strong>Zeln</strong> переведен на скамейку запасных.
+            </p>
+        </div>
+
+    </div>
+</div>
+        
         </div>
 
         <!-- TAB 4: SOCIALS -->
