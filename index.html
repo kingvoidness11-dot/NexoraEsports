@@ -30,7 +30,7 @@
             font-family: 'Inter', sans-serif;
         }
 
-        /* УНИКАЛЬНЫЙ ИГРОВОЙ ФОН С ЭФФЕКТАМИ СВЕЧЕНИЯ И ВОДЯНОГО ЗНАКА */
+        /* УНИКАЛЬНЫЙ ИГРОВОЙ ФОН */
         body {
             background-color: var(--bg-main);
             color: var(--text-primary);
@@ -40,17 +40,14 @@
             position: relative;
             overflow-x: hidden;
             background-image: 
-                /* Неоновые лучи и туман */
                 radial-gradient(circle at 80% 10%, rgba(204, 255, 0, 0.12) 0%, transparent 40%),
                 radial-gradient(circle at 10% 90%, rgba(204, 255, 0, 0.1) 0%, transparent 45%),
                 radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0) 0%, rgba(5, 8, 5, 0.8) 100%),
-                /* Матричная точечная текстура */
                 radial-gradient(rgba(204, 255, 0, 0.1) 1px, transparent 1px);
             background-size: 100% 100%, 100% 100%, 100% 100%, 30px 30px;
             background-attachment: fixed;
         }
 
-        /* Абстрактные силуэты логотипа (змеи) на заднем плане */
         body::before {
             content: "\f8c9";
             font-family: "Font Awesome 6 Free";
@@ -457,8 +454,229 @@
             top: 3px;
         }
 
+        /* BANNER SUBSCRIBE NEWS */
+        .subscribe-banner {
+            background: linear-gradient(135deg, rgba(204, 255, 0, 0.15) 0%, rgba(14, 20, 14, 0.9) 100%);
+            border: 1px solid var(--accent-green);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 0 25px rgba(204, 255, 0, 0.15);
+        }
+
+        .subscribe-info h4 {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .subscribe-info p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .subscribe-btn {
+            background: var(--accent-green);
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.25s ease;
+            box-shadow: 0 0 15px var(--accent-green-glow);
+        }
+
+        .subscribe-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px var(--accent-green-glow);
+            background: #d8ff33;
+        }
+
+        /* MODAL POPUP */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: #0d120d;
+            border: 1px solid var(--accent-green);
+            border-radius: 20px;
+            max-width: 450px;
+            width: 100%;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 0 40px rgba(204, 255, 0, 0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: var(--text-secondary);
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-modal:hover { color: #fff; }
+
+        .modal-box h3 {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .modal-box p {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .push-categories {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(204, 255, 0, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 12px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .checkbox-label:hover {
+            border-color: var(--accent-green);
+            background: rgba(204, 255, 0, 0.08);
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            accent-color: var(--accent-green);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .modal-action-btn {
+            width: 100%;
+            background: var(--accent-green);
+            color: #000;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.25s ease;
+            box-shadow: 0 0 15px var(--accent-green-glow);
+        }
+
+        .modal-action-btn:hover {
+            background: #d8ff33;
+            transform: translateY(-2px);
+        }
+
+        /* SOCIAL MEDIA GRID */
+        .socials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .social-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            text-decoration: none;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .social-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-green);
+            box-shadow: 0 10px 25px var(--accent-green-glow);
+        }
+
+        .social-card i {
+            font-size: 2.8rem;
+            color: var(--accent-green);
+            transition: transform 0.3s ease;
+        }
+
+        .social-card:hover i {
+            transform: scale(1.1);
+        }
+
+        .social-card h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .social-card span {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
         @media (max-width: 1200px) {
             .side-decoration { display: none; }
+        }
+
+        @media (max-width: 600px) {
+            .nav-links { gap: 4px; }
+            .nav-btn { padding: 6px 10px; font-size: 0.75rem; }
+            .subscribe-banner { flex-direction: column; text-align: center; }
+            .subscribe-info h4 { justify-content: center; }
         }
     </style>
 </head>
@@ -487,6 +705,7 @@
                 <button class="nav-btn active" onclick="switchTab('ranking')">Рейтинг</button>
                 <button class="nav-btn" onclick="switchTab('rules')">Правила</button>
                 <button class="nav-btn" onclick="switchTab('news')">Новости</button>
+                <button class="nav-btn" onclick="switchTab('socials')">Соцсети</button>
             </div>
         </div>
     </header>
@@ -679,6 +898,17 @@
 
         <!-- TAB 3: NEWS -->
         <div id="news" class="section-content">
+            <!-- БАННЕР ПОДПИСКИ НА PUSH -->
+            <div class="subscribe-banner">
+                <div class="subscribe-info">
+                    <h4><i class="fa-solid fa-bell"></i> Push-уведомления</h4>
+                    <p>Подпишитесь, чтобы моментально получать анонсы прямо на свой экран.</p>
+                </div>
+                <button class="subscribe-btn" id="mainSubBtn" onclick="openSubscribeModal()">
+                    <i class="fa-solid fa-bell-concierge"></i> Настроить подписку
+                </button>
+            </div>
+
             <div class="info-card">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                     <span class="status-pill" style="background: rgba(204, 255, 0, 0.15); color: var(--accent-green); border-color: rgba(204, 255, 0, 0.3);">
@@ -694,9 +924,66 @@
                 </p>
             </div>
         </div>
+
+        <!-- TAB 4: SOCIALS -->
+        <div id="socials" class="section-content">
+            <div class="socials-grid">
+                <a href="https://t.me/nexora_esports" target="_blank" class="social-card">
+                    <i class="fa-brands fa-telegram"></i>
+                    <h4>Telegram</h4>
+                    <span>Официальный канал и новости</span>
+                </a>
+                <a href="https://dsc.gg/nexora-esports" target="_blank" class="social-card">
+                    <i class="fa-brands fa-discord"></i>
+                    <h4>Discord</h4>
+                    <span>Наш сервер и комьюнити</span>
+                </a>
+                <a href="https://www.tiktok.com/@nexora.team?_r=1&_t=ZS-97VPe9Qislw" target="_blank" class="social-card">
+                    <i class="fa-brands fa-tiktok"></i>
+                    <h4>TikTok</h4>
+                    <span>Клипы, нарезки и хайлайты</span>
+                </a>
+                <a href="https://www.youtube.com/@NEXORA_TEAM_GG" target="_blank" class="social-card">
+                    <i class="fa-brands fa-youtube"></i>
+                    <h4>YouTube</h4>
+                    <span>Записи матчей и влоги</span>
+                </a>
+            </div>
+        </div>
     </div>
 
-    <!-- JAVASCRIPT FOR INTERACTION -->
+    <!-- МОДАЛЬНОЕ ОКНО PUSH-ПОДПИСКИ -->
+    <div class="modal-overlay" id="subModal">
+        <div class="modal-box">
+            <span class="close-modal" onclick="closeSubscribeModal()">&times;</span>
+            <div style="text-align: center; margin-bottom: 15px;">
+                <i class="fa-solid fa-desktop" style="font-size: 2.5rem; color: var(--accent-green);"></i>
+            </div>
+            <h3>Push-уведомления лиги</h3>
+            <p>Выберите, о каких событиях вы хотите получать мгновенные всплывающие оповещения:</p>
+            
+            <div class="push-categories">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="catRosters" checked>
+                    <span><i class="fa-solid fa-user-gear" style="color: var(--accent-green);"></i> Трансферы и ростеры</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="catTournaments" checked>
+                    <span><i class="fa-solid fa-trophy" style="color: var(--accent-green);"></i> Анонсы турниров и матчей</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="catGlobalNews">
+                    <span><i class="fa-solid fa-newspaper" style="color: var(--accent-green);"></i> Все главные новости</span>
+                </label>
+            </div>
+
+            <button class="modal-action-btn" onclick="subscribePush()">
+                <i class="fa-solid fa-check"></i> Включить Push-уведомления
+            </button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT FOR INTERACTION & PUSH -->
     <script>
         function switchTab(tabId) {
             document.querySelectorAll('.section-content').forEach(s => s.classList.remove('active'));
@@ -709,6 +996,59 @@
         function toggleRoster(element) {
             element.classList.toggle('open');
         }
+
+        /* MODAL & PUSH LOGIC */
+        function openSubscribeModal() {
+            document.getElementById('subModal').classList.add('active');
+        }
+
+        function closeSubscribeModal() {
+            document.getElementById('subModal').classList.remove('active');
+        }
+
+        function subscribePush() {
+            if ("Notification" in window) {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        // Сохранение настроек подписки
+                        const prefs = {
+                            rosters: document.getElementById('catRosters').checked,
+                            tournaments: document.getElementById('catTournaments').checked,
+                            globalNews: document.getElementById('catGlobalNews').checked,
+                            subscribedAt: new Date().toISOString()
+                        };
+                        localStorage.setItem('nexora_push_prefs', JSON.stringify(prefs));
+
+                        // Обновляем текст кнопки на баннере
+                        const btn = document.getElementById('mainSubBtn');
+                        btn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Уведомления включены';
+                        btn.style.background = 'transparent';
+                        btn.style.color = 'var(--accent-green)';
+                        btn.style.border = '1px solid var(--accent-green)';
+
+                        alert("Готово! Вы успешно подписались на браузерные Push-уведомления.");
+                        closeSubscribeModal();
+                    } else {
+                        alert("Вы отклонили доступ к уведомлениям. Разрешить их можно в настройках браузера.");
+                    }
+                });
+            } else {
+                alert("Ваш браузер не поддерживает Push-уведомления.");
+            }
+        }
+
+        // Проверка статуса подписки при загрузке страницы
+        window.addEventListener('DOMContentLoaded', () => {
+            if ("Notification" in window && Notification.permission === "granted" && localStorage.getItem('nexora_push_prefs')) {
+                const btn = document.getElementById('mainSubBtn');
+                if (btn) {
+                    btn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Уведомления включены';
+                    btn.style.background = 'transparent';
+                    btn.style.color = 'var(--accent-green)';
+                    btn.style.border = '1px solid var(--accent-green)';
+                }
+            }
+        });
     </script>
 </body>
 </html>
