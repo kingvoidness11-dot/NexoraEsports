@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="ru">
-<!-- ONESIGNAL SDK -->
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "3582b50d-c6bf-434f-bdcf-3cc5c5897782",
-      safari_web_id: "web.onesignal.auto.36c77d1a-9357-4d49-966b-0de749957ba2",
-      notifyButton: {
-        enable: true,
-      },
-    });
-  });
-</script>
-    <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexora Esports — Ranking & Rosters</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- ONESIGNAL SDK (ПОДКЛЮЧЕНИЕ УВЕДОМЛЕНИЙ) -->
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
+          appId: "3582b50d-c6bf-434f-bdcf-3cc5c5897782",
+          safari_web_id: "web.onesignal.auto.36c77d1a-9357-4d49-966b-0de749957ba2",
+          notifyButton: {
+            enable: true,
+          },
+        });
+      });
+    </script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Teko:wght@600;700&family=Inter:wght@400;600;700;800&display=swap');
 
@@ -59,52 +61,6 @@
                 radial-gradient(rgba(204, 255, 0, 0.1) 1px, transparent 1px);
             background-size: 100% 100%, 100% 100%, 100% 100%, 30px 30px;
             background-attachment: fixed;
-        }
-
-        body::before {
-            content: "\f8c9";
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            position: fixed;
-            top: -100px;
-            right: -100px;
-            font-size: 45vw;
-            color: rgba(204, 255, 0, 0.02);
-            pointer-events: none;
-            z-index: 0;
-            transform: rotate(-15deg);
-        }
-
-        .side-decoration {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            color: rgba(204, 255, 0, 0.25);
-            font-family: 'Teko', sans-serif;
-            font-size: 1.5rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .side-decoration.left { left: 35px; }
-        .side-decoration.right { right: 35px; }
-
-        .side-line {
-            width: 2px;
-            height: 140px;
-            background: linear-gradient(180deg, transparent, var(--accent-green), transparent);
-            box-shadow: 0 0 12px var(--accent-green-glow);
-        }
-
-        .side-text {
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
         }
 
         header {
@@ -249,10 +205,6 @@
             transition: all 0.2s ease;
         }
 
-        .team-item:last-child {
-            border-bottom: none;
-        }
-
         .team-row {
             display: grid;
             grid-template-columns: 80px 1fr 100px 40px;
@@ -262,9 +214,7 @@
             transition: background 0.2s;
         }
 
-        .team-row:hover {
-            background: var(--bg-card-hover);
-        }
+        .team-row:hover { background: var(--bg-card-hover); }
 
         .rank-badge {
             font-family: 'Teko', sans-serif;
@@ -278,7 +228,6 @@
         .rank-1 { color: var(--gold); text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
         .rank-2 { color: var(--silver); }
         .rank-3 { color: var(--bronze); }
-        .rank-other { color: var(--text-secondary); }
 
         .team-title {
             display: flex;
@@ -305,7 +254,6 @@
             color: var(--accent-green);
             border: 1px solid rgba(204, 255, 0, 0.25);
             text-align: center;
-            letter-spacing: 0.5px;
         }
 
         .chevron {
@@ -346,8 +294,6 @@
             gap: 8px;
         }
 
-        .roster-section-title:first-child { margin-top: 0; }
-
         .roster-table {
             width: 100%;
             border-collapse: collapse;
@@ -373,8 +319,6 @@
             border-bottom: 1px solid var(--border-color);
         }
 
-        .roster-table tr:last-child td { border-bottom: none; }
-
         .player-nick { font-weight: 700; color: #fff; }
         .player-role { color: var(--accent-green); font-weight: 600; font-size: 0.8rem; }
 
@@ -393,18 +337,6 @@
             border-color: rgba(204, 255, 0, 0.35);
             transform: translateY(-2px);
         }
-
-        .info-card h3 {
-            font-size: 1.2rem;
-            color: #fff;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .info-card h3 i { color: var(--accent-green); }
-        .info-card p, .info-card ul { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6; }
 
         .rules-list { list-style: none; padding-left: 0; }
         .rules-list li { position: relative; padding-left: 26px; margin-bottom: 12px; }
@@ -430,16 +362,6 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
-            box-shadow: 0 0 25px rgba(204, 255, 0, 0.15);
-        }
-
-        .subscribe-info h4 {
-            font-size: 1.2rem;
-            color: #fff;
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .subscribe-btn {
@@ -455,51 +377,12 @@
             align-items: center;
             gap: 10px;
             transition: all 0.25s ease;
-            box-shadow: 0 0 15px var(--accent-green-glow);
         }
 
         .subscribe-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 25px var(--accent-green-glow);
             background: #d8ff33;
         }
-
-        /* МОДАЛЬНОЕ ОКНО */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 1000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .modal-overlay.active { display: flex; }
-
-        .modal-box {
-            background: #0d120d;
-            border: 1px solid var(--accent-green);
-            border-radius: 20px;
-            max-width: 450px;
-            width: 100%;
-            padding: 30px;
-            position: relative;
-            box-shadow: 0 0 40px rgba(204, 255, 0, 0.2);
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 15px; right: 20px;
-            color: var(--text-secondary);
-            font-size: 1.4rem;
-            cursor: pointer;
-        }
-
-        .close-modal:hover { color: #fff; }
 
         .socials-grid {
             display: grid;
@@ -526,32 +409,12 @@
         .social-card:hover {
             transform: translateY(-5px);
             border-color: var(--accent-green);
-            box-shadow: 0 10px 25px var(--accent-green-glow);
         }
 
         .social-card i { font-size: 2.8rem; color: var(--accent-green); }
-
-        @media (max-width: 1200px) { .side-decoration { display: none; } }
-        @media (max-width: 600px) {
-            .nav-links { gap: 4px; }
-            .nav-btn { padding: 6px 10px; font-size: 0.75rem; }
-            .subscribe-banner { flex-direction: column; text-align: center; }
-        }
     </style>
 </head>
 <body>
-
-    <div class="side-decoration left">
-        <div class="side-line"></div>
-        <div class="side-text">NEXORA LEAGUE</div>
-        <div class="side-line"></div>
-    </div>
-    
-    <div class="side-decoration right">
-        <div class="side-line"></div>
-        <div class="side-text">SEASON 2026</div>
-        <div class="side-line"></div>
-    </div>
 
     <!-- HEADER NAVIGATION -->
     <header>
@@ -606,36 +469,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="player-nick">Pike</td>
-                                    <td>20</td>
-                                    <td>Украина 🇺🇦</td>
-                                    <td class="player-role">Entry</td>
-                                </tr>
-                                <tr>
-                                    <td class="player-nick">Tur1kxx</td>
-                                    <td>15</td>
-                                    <td>Украина 🇺🇦</td>
-                                    <td class="player-role">Rifler</td>
-                                </tr>
-                                <tr>
-                                    <td class="player-nick">Void</td>
-                                    <td>15</td>
-                                    <td>Казахстан 🇰🇿</td>
-                                    <td class="player-role">AWP / IGL</td>
-                                </tr>
-                                <tr>
-                                    <td class="player-nick">maTTe0qq</td>
-                                    <td>15</td>
-                                    <td>Украина 🇺🇦</td>
-                                    <td class="player-role">Lurker</td>
-                                </tr>
-                                <tr>
-                                    <td class="player-nick">kiyo666</td>
-                                    <td>17</td>
-                                    <td>Россия 🇷🇺</td>
-                                    <td class="player-role">Support</td>
-                                </tr>
+                                <tr><td class="player-nick">Pike</td><td>20</td><td>Украина 🇺🇦</td><td class="player-role">Entry</td></tr>
+                                <tr><td class="player-nick">Tur1kxx</td><td>15</td><td>Украина 🇺🇦</td><td class="player-role">Rifler</td></tr>
+                                <tr><td class="player-nick">Void</td><td>15</td><td>Казахстан 🇰🇿</td><td class="player-role">AWP / IGL</td></tr>
+                                <tr><td class="player-nick">maTTe0qq</td><td>15</td><td>Украина 🇺🇦</td><td class="player-role">Lurker</td></tr>
+                                <tr><td class="player-nick">kiyo666</td><td>17</td><td>Россия 🇷🇺</td><td class="player-role">Support</td></tr>
                             </tbody>
                         </table>
 
@@ -650,12 +488,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="player-nick">Zeln</td>
-                                    <td>15</td>
-                                    <td>Украина 🇺🇦</td>
-                                    <td class="player-role">Lurker (Замена)</td>
-                                </tr>
+                                <tr><td class="player-nick">Zeln</td><td>15</td><td>Украина 🇺🇦</td><td class="player-role">Lurker (Замена)</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -680,33 +513,6 @@
                     </div>
                     <div class="roster-container"><div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Состав в процессе анонса</div></div>
                 </div>
-                <div class="team-item" onclick="toggleRoster(this)">
-                    <div class="team-row">
-                        <div class="rank-badge rank-other">#4</div>
-                        <div class="team-title"><span class="team-dot" style="color:#a855f7; background:#a855f7;"></span> Nexora Academy 3 🟣</div>
-                        <div><span class="status-pill">OPEN</span></div>
-                        <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
-                    </div>
-                    <div class="roster-container"><div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Состав в процессе анонса</div></div>
-                </div>
-                <div class="team-item" onclick="toggleRoster(this)">
-                    <div class="team-row">
-                        <div class="rank-badge rank-other">#5</div>
-                        <div class="team-title"><span class="team-dot" style="color:#eab308; background:#eab308;"></span> Nexora Academy 4 🟡</div>
-                        <div><span class="status-pill">OPEN</span></div>
-                        <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
-                    </div>
-                    <div class="roster-container"><div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Состав в процессе анонса</div></div>
-                </div>
-                <div class="team-item" onclick="toggleRoster(this)">
-                    <div class="team-row">
-                        <div class="rank-badge rank-other">#6</div>
-                        <div class="team-title"><span class="team-dot" style="color:#f97316; background:#f97316;"></span> Nexora Academy 5 🟠</div>
-                        <div><span class="status-pill">OPEN</span></div>
-                        <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
-                    </div>
-                    <div class="roster-container"><div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Состав в процессе анонса</div></div>
-                </div>
             </div>
         </div>
 
@@ -718,8 +524,7 @@
                 <ul class="rules-list">
                     <li>Все официальные матчи фиксируются администрацией лиги. За каждую победу команда получает очки рейтинга.</li>
                     <li>Игроки основного состава обязаны придерживаться дисциплинарного регламента лиги.</li>
-                    <li>Переходы (трансферы) между Академией и Основным составом разрешены только во время официальных трансферных окон.</li>
-                    <li>Использование неспортивного поведения или стороннего ПО приводит к дисквалификации всей команды.</li>
+                    <li>Переходы между Академией и Основным составом разрешены только во время трансферных окон.</li>
                 </ul>
             </div>
         </div>
@@ -730,44 +535,44 @@
             <div class="subscribe-banner">
                 <div class="subscribe-info">
                     <h4><i class="fa-solid fa-bell"></i> Push-уведомления</h4>
-                    <p>Подпишитесь, чтобы моментально получать анонсы прямо на свой экран.</p>
+                    <p>Подпишитесь, чтобы получать важные анонсы прямо на свой экран.</p>
                 </div>
-                <button class="subscribe-btn" id="mainSubBtn" onclick="openSubscribeModal()">
-                    <i class="fa-solid fa-bell-concierge"></i> Настроить подписку
+                <button class="subscribe-btn" id="mainSubBtn" onclick="requestOneSignalPush()">
+                    <i class="fa-solid fa-bell-concierge"></i> Включить уведомления
                 </button>
             </div>
 
-            <!-- ЛЕНТА НОВОСТЕЙ -->
             <div id="newsContainer">
-            <!-- НОВОСТЬ: ТЕЛЕГРАМ-КАНАЛ -->
-<div class="info-card" style="border-color: rgba(204, 255, 0, 0.4);">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-        <span class="status-pill" style="background: rgba(0, 136, 204, 0.15); color: #0088cc; border-color: rgba(0, 136, 204, 0.3);">
-            📱 TELEGRAM
-        </span>
-        <span style="font-size: 0.8rem; color: var(--text-secondary);">
-            <i class="fa-regular fa-calendar"></i> 23 Июля 2026
-        </span>
-    </div>
-    <h3><i class="fa-brands fa-telegram" style="color: #0088cc;"></i> Основной новостной канал переходит в Telegram!</h3>
-    <p>
-        Все самые свежие новости, эксклюзивные анонсы, результаты матчей и закульсье <strong>NEXORA LEAGUE</strong> теперь публикуются в нашем официальном Telegram-канале.
-    </p>
-    <br>
-    <div style="background: rgba(0, 136, 204, 0.05); border: 1px dashed rgba(0, 136, 204, 0.3); padding: 14px; border-radius: 10px;">
-        <strong style="color: #fff; font-size: 0.9rem;">Что вас ждёт в Telegram:</strong>
-        <ul class="rules-list" style="margin-top: 8px;">
-            <li>Быстрые анонсы матчей и трансферов.</li>
-            <li>Инсайды из жизни основного состава и академий.</li>
-            <li>Общение с игроками и прямое голосование за форматы турниров.</li>
-        </ul>
-    </div>
-    <br>
-    <p style="font-size: 0.88rem; color: var(--text-secondary);">
-        👉 Подписывайтесь, чтобы ничего не пропустить: <a href="https://t.me/nexora_esports" target="_blank" style="color: #0088cc; font-weight: 700; text-decoration: underline;">t.me/nexora_esports</a>
-    </p>
-</div>
-                <!-- НОВОСТЬ: ПОИСК ЗАПАСНОГО ИГРОКА -->
+                <!-- НОВОСТЬ 1: TELEGRAM -->
+                <div class="info-card" style="border-color: rgba(0, 136, 204, 0.4);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <span class="status-pill" style="background: rgba(0, 136, 204, 0.15); color: #0088cc; border-color: rgba(0, 136, 204, 0.3);">
+                            📱 TELEGRAM
+                        </span>
+                        <span style="font-size: 0.8rem; color: var(--text-secondary);">
+                            <i class="fa-regular fa-calendar"></i> 23 Июля 2026
+                        </span>
+                    </div>
+                    <h3><i class="fa-brands fa-telegram" style="color: #0088cc;"></i> Основной новостной канал переходит в Telegram!</h3>
+                    <p>
+                        Все самые свежие новости, эксклюзивные анонсы, результаты матчей и закулисье <strong>NEXORA LEAGUE</strong> теперь публикуются в нашем официальном Telegram-канале.
+                    </p>
+                    <br>
+                    <div style="background: rgba(0, 136, 204, 0.05); border: 1px dashed rgba(0, 136, 204, 0.3); padding: 14px; border-radius: 10px;">
+                        <strong style="color: #fff; font-size: 0.9rem;">Что вас ждёт в Telegram:</strong>
+                        <ul class="rules-list" style="margin-top: 8px;">
+                            <li>Быстрые анонсы матчей и трансферов.</li>
+                            <li>Инсайды из жизни основного состава и академий.</li>
+                            <li>Общение с игроками и прямое голосование за форматы турниров.</li>
+                        </ul>
+                    </div>
+                    <br>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary);">
+                        👉 Подписывайтесь, чтобы ничего не пропустить: <a href="https://t.me/nexora_esports" target="_blank" style="color: #0088cc; font-weight: 700; text-decoration: underline;">t.me/nexora_esports</a>
+                    </p>
+                </div>
+
+                <!-- НОВОСТЬ 2: ПОИСК ИГРОКА -->
                 <div class="info-card" style="border-color: rgba(204, 255, 0, 0.4);">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                         <span class="status-pill" style="background: rgba(204, 255, 0, 0.15); color: var(--accent-green); border-color: rgba(204, 255, 0, 0.3);">
@@ -781,35 +586,6 @@
                     <p>
                         Основной состав <strong>NEXORA TEAM</strong> открывает набор на позицию <strong>запасного игрока (6th player / Stand-in)</strong>.
                     </p>
-                    <br>
-                    <div style="background: rgba(204, 255, 0, 0.03); border: 1px dashed var(--border-color); padding: 14px; border-radius: 10px;">
-                        <strong style="color: #fff; font-size: 0.9rem;">Требования к кандидатам:</strong>
-                        <ul class="rules-list" style="margin-top: 8px;">
-                            <li>Адекватность, высокая дисциплина и готовность к тренировкам.</li>
-                            <li>Понимание своей роли и коммуникация на высоком уровне.</li>
-                            <li>Готовность выйти на замену в официальных матчах лиги.</li>
-                        </ul>
-                    </div>
-                    <br>
-                    <p style="font-size: 0.88rem; color: var(--text-secondary);">
-                        📩 Для подачи заявки пишите в наш <a href="https://dsc.gg/nexora-esports" target="_blank" style="color: var(--accent-green); text-decoration: underline;">Discord</a> или в личные сообщения администрации.
-                    </p>
-                </div>
-
-                <!-- ПРЕДЫДУЩАЯ НОВОСТЬ -->
-                <div class="info-card">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                        <span class="status-pill" style="background: rgba(204, 255, 0, 0.15); color: var(--accent-green); border-color: rgba(204, 255, 0, 0.3);">
-                            🔥 ОФИЦИАЛЬНО
-                        </span>
-                        <span style="font-size: 0.8rem; color: var(--text-secondary);">
-                            <i class="fa-regular fa-calendar"></i> 23 Июля 2026
-                        </span>
-                    </div>
-                    <h3><i class="fa-solid fa-bullhorn"></i> Формирование обновленного состава NEXORA TEAM</h3>
-                    <p>
-                        Официально утвержден основной ростер <strong>NEXORA TEAM</strong> на текущий сезон. Капитаном и игроком позиции AWP назначена позиция <strong>Void</strong>. Игрок <strong>Zeln</strong> переведен на скамейку запасных.
-                    </p>
                 </div>
             </div>
         </div>
@@ -820,57 +596,24 @@
                 <a href="https://t.me/nexora_esports" target="_blank" class="social-card">
                     <i class="fa-brands fa-telegram"></i>
                     <h4>Telegram</h4>
-                    <span>Официальный канал и новости</span>
+                    <span>Официальный канал</span>
                 </a>
                 <a href="https://dsc.gg/nexora-esports" target="_blank" class="social-card">
                     <i class="fa-brands fa-discord"></i>
                     <h4>Discord</h4>
-                    <span>Наш сервер и комьюнити</span>
+                    <span>Наш сервер</span>
                 </a>
                 <a href="https://www.tiktok.com/@nexora.team?_r=1&_t=ZS-97VPe9Qislw" target="_blank" class="social-card">
                     <i class="fa-brands fa-tiktok"></i>
                     <h4>TikTok</h4>
-                    <span>Клипы, нарезки и хайлайты</span>
+                    <span>Клипы и нарезки</span>
                 </a>
                 <a href="https://www.youtube.com/@NEXORA_TEAM_GG" target="_blank" class="social-card">
                     <i class="fa-brands fa-youtube"></i>
                     <h4>YouTube</h4>
-                    <span>Записи матчей и влоги</span>
+                    <span>Записи матчей</span>
                 </a>
             </div>
-        </div>
-    </div>
-
-    <!-- МОДАЛЬНОЕ ОКНО PUSH-ПОДПИСКИ -->
-    <div class="modal-overlay" id="subModal">
-        <div class="modal-box">
-            <span class="close-modal" onclick="closeSubscribeModal()">&times;</span>
-            <div style="text-align: center; margin-bottom: 15px;">
-                <i class="fa-solid fa-bell" style="font-size: 2.5rem; color: var(--accent-green);"></i>
-            </div>
-            <h3 style="color: #fff; text-align: center; margin-bottom: 8px;">Push-уведомления</h3>
-            <p style="color: var(--text-secondary); font-size: 0.88rem; text-align: center; margin-bottom: 20px;">
-                Выберите, о чем хотите получать моментальные всплывающие сообщения:
-            </p>
-            
-            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px;">
-                <label style="display: flex; align-items: center; gap: 12px; background: rgba(204, 255, 0, 0.03); border: 1px solid var(--border-color); padding: 12px; border-radius: 10px; cursor: pointer; color: #fff; font-size: 0.9rem;">
-                    <input type="checkbox" id="catRosters" checked style="accent-color: var(--accent-green); width: 18px; height: 18px;">
-                    <span>Трансферы и ростеры</span>
-                </label>
-                <label style="display: flex; align-items: center; gap: 12px; background: rgba(204, 255, 0, 0.03); border: 1px solid var(--border-color); padding: 12px; border-radius: 10px; cursor: pointer; color: #fff; font-size: 0.9rem;">
-                    <input type="checkbox" id="catTournaments" checked style="accent-color: var(--accent-green); width: 18px; height: 18px;">
-                    <span>Анонсы турниров и матчей</span>
-                </label>
-                <label style="display: flex; align-items: center; gap: 12px; background: rgba(204, 255, 0, 0.03); border: 1px solid var(--border-color); padding: 12px; border-radius: 10px; cursor: pointer; color: #fff; font-size: 0.9rem;">
-                    <input type="checkbox" id="catGlobalNews" checked style="accent-color: var(--accent-green); width: 18px; height: 18px;">
-                    <span>Все главные новости</span>
-                </label>
-            </div>
-
-            <button class="subscribe-btn" onclick="subscribePush()" style="width: 100%; justify-content: center;">
-                <i class="fa-solid fa-check"></i> Включить Push-уведомления
-            </button>
         </div>
     </div>
 
@@ -890,62 +633,18 @@
             element.classList.toggle('open');
         }
 
-        /* МОДАЛКА И PUSH */
-        function openSubscribeModal() {
-            document.getElementById('subModal').classList.add('active');
-        }
-
-        function closeSubscribeModal() {
-            document.getElementById('subModal').classList.remove('active');
-        }
-
-        function subscribePush() {
-            if (!("Notification" in window)) {
-                alert("Ваш браузер не поддерживает Push-уведомления.");
-                return;
-            }
-
-            Notification.requestPermission().then(permission => {
-                if (permission === "granted") {
-                    const prefs = {
-                        rosters: document.getElementById('catRosters').checked,
-                        tournaments: document.getElementById('catTournaments').checked,
-                        globalNews: document.getElementById('catGlobalNews').checked,
-                        subscribedAt: new Date().toISOString()
-                    };
-                    localStorage.setItem('nexora_push_prefs', JSON.stringify(prefs));
-
-                    updateSubButtonUI();
-                    
-                    // Отправка сразу прямого тестового уведомления
-                    new Notification("NEXORA LEAGUE", {
-                        body: "Вы успешно подписались на уведомления!",
-                        icon: "https://cdn-icons-png.flaticon.com/512/1828/1828884.png"
-                    });
-
-                    closeSubscribeModal();
-                } else if (permission === "denied") {
-                    alert("Вы заблокировали доступ к уведомлениям. Сбросьте настройки в адресной строке браузера (иконка замочка/настроек).");
-                }
+        function requestOneSignalPush() {
+            window.OneSignalDeferred = window.OneSignalDeferred || [];
+            window.OneSignalDeferred.push(function(OneSignal) {
+                OneSignal.Notifications.requestPermission().then(function(permission) {
+                    if (permission) {
+                        alert("✅ Вы успешно подписались на фоновые Push-уведомления!");
+                    } else {
+                        alert("Вы отклонили запрос на уведомления.");
+                    }
+                });
             });
         }
-
-        function updateSubButtonUI() {
-            const btn = document.getElementById('mainSubBtn');
-            if (btn) {
-                btn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Уведомления включены';
-                btn.style.background = 'transparent';
-                btn.style.color = 'var(--accent-green)';
-                btn.style.border = '1px solid var(--accent-green)';
-            }
-        }
-
-        // Проверка статуса при загрузке страницы
-        window.addEventListener('DOMContentLoaded', () => {
-            if ("Notification" in window && Notification.permission === "granted" && localStorage.getItem('nexora_push_prefs')) {
-                updateSubButtonUI();
-            }
-        });
     </script>
 </body>
 </html>
