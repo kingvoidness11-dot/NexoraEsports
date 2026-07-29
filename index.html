@@ -5,16 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexora Esports — Ranking & Rosters</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-   
+    
+    <!-- ONESIGNAL SDK (ПОДКЛЮЧЕНИЕ УВЕДОМЛЕНИЙ) -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "3582b50d-c6bf-434f-bdcf-3cc5c5897782",
-    });
-  });
-</script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
+          appId: "3582b50d-c6bf-434f-bdcf-3cc5c5897782",
+          safari_web_id: "web.onesignal.auto.36c77d1a-9357-4d49-966b-0de749957ba2",
+          notifyButton: {
+            enable: true,
+          },
+        });
+      });
+    </script>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Teko:wght@600;700&family=Inter:wght@400;600;700;800&display=swap');
@@ -69,7 +74,7 @@
         }
 
         .nav-container {
-            max-width: 1050px;
+            max-width: 1120px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -95,7 +100,7 @@
 
         .nav-links {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             background: rgba(204, 255, 0, 0.03);
             padding: 4px;
             border-radius: 10px;
@@ -106,11 +111,11 @@
             background: transparent;
             border: none;
             color: var(--text-secondary);
-            padding: 8px 18px;
+            padding: 8px 14px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             transition: all 0.25s ease;
         }
 
@@ -347,6 +352,35 @@
             top: 3px;
         }
 
+        .system-rules-content p, .system-rules-content ul, .system-rules-content li {
+            color: #d1d5db;
+            font-size: 0.92rem;
+            margin-bottom: 10px;
+        }
+        .system-rules-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .system-rules-content li {
+            position: relative;
+            padding-left: 22px;
+            margin-bottom: 8px;
+        }
+        .system-rules-content li::before {
+            content: "•";
+            color: var(--accent-green);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+        .rating-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 20px 0;
+        }
+
         .subscribe-banner {
             background: linear-gradient(135deg, rgba(204, 255, 0, 0.15) 0%, rgba(14, 20, 14, 0.9) 100%);
             border: 1px solid var(--accent-green);
@@ -408,6 +442,28 @@
         }
 
         .social-card i { font-size: 2.8rem; color: var(--accent-green); }
+
+        /* WATERMARK (NEON PURPLE) */
+        .watermark {
+            position: fixed;
+            bottom: 12px;
+            right: 15px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #d8b4fe;
+            background: rgba(15, 10, 25, 0.85);
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(168, 85, 247, 0.35);
+            backdrop-filter: blur(6px);
+            z-index: 999;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.35);
+        }
+        .watermark span {
+            color: #c084fc;
+            text-shadow: 0 0 10px rgba(192, 132, 252, 0.8), 0 0 20px rgba(168, 85, 247, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -421,6 +477,7 @@
             <div class="nav-links">
                 <button class="nav-btn active" onclick="switchTab('ranking', event)">Рейтинг</button>
                 <button class="nav-btn" onclick="switchTab('rules', event)">Правила</button>
+                <button class="nav-btn" onclick="switchTab('system', event)">Система рейтинга</button>
                 <button class="nav-btn" onclick="switchTab('news', event)">Новости</button>
                 <button class="nav-btn" onclick="switchTab('socials', event)">Соцсети</button>
             </div>
@@ -443,7 +500,7 @@
                     <div></div>
                 </div>
 
-                <!-- RANK 1: NEXORA TEAM -->
+                <!-- RANK 1: NEXORA TEAM (ОСНОВНОЙ СОСТАВ) -->
                 <div class="team-item" onclick="toggleRoster(this)">
                     <div class="team-row">
                         <div class="rank-badge rank-1"><i class="fa-solid fa-trophy"></i> #1</div>
@@ -549,7 +606,56 @@
             </div>
         </div>
 
-        <!-- TAB 3: NEWS -->
+        <!-- TAB 3: SYSTEM RATING -->
+        <div id="system" class="section-content">
+            <div class="info-card">
+                <h3 style="color: var(--accent-green); margin-bottom: 15px;"><i class="fa-solid fa-book-bookmark"></i> Nexora League Ranking — Правила начисления очков</h3>
+                
+                <div class="system-rules-content">
+                    <p><strong style="color: #fff;"><i class="fa-solid fa-right-left" style="color: var(--accent-green);"></i> Замена состава</strong></p>
+                    <p>Если команда заменяет <strong>более 2 игроков</strong> основного состава:<br>команда теряет <strong>50%</strong> своих рейтинговых очков.</p>
+                    <p>В качестве компенсации за успешную игру новым составом:</p>
+                    <ul>
+                        <li>за <strong>первую победу</strong> возвращается <strong>25%</strong> от снятых очков;</li>
+                        <li>за <strong>вторую победу</strong> возвращается ещё <strong>25%</strong> от снятых очков.</li>
+                    </ul>
+                    <p><strong>Пример:</strong></p>
+                    <ul>
+                        <li>До замены — <strong>700 очков</strong>.</li>
+                        <li>После замены — <strong>350 очков</strong>.</li>
+                        <li>2 победы — <strong>+175 очков</strong>.</li>
+                        <li>Итог после двух побед — снова <strong>525 очков</strong>.</li>
+                    </ul>
+
+                    <div class="rating-divider"></div>
+
+                    <p><strong style="color: #fff;"><i class="fa-solid fa-gamepad" style="color: var(--accent-green);"></i> Матчи против команд из рейтинга</strong></p>
+                    <ul>
+                        <li>🟢 Победа — <strong style="color: var(--accent-green);">+15 очков</strong></li>
+                        <li>🔴 Поражение — <strong style="color: #ff4d4d;">–5 очков</strong></li>
+                    </ul>
+
+                    <div class="rating-divider"></div>
+
+                    <p><strong style="color: #fff;"><i class="fa-solid fa-trophy" style="color: var(--gold);"></i> Турниры</strong></p>
+                    <ul>
+                        <li>🏆 Победа на турнире — <strong style="color: var(--accent-green);">+100 очков</strong></li>
+                        <li>✅ Каждая победа на турнире — <strong style="color: var(--accent-green);">+10 очков</strong></li>
+                        <li>❌ Каждое поражение на турнире — <strong style="color: #ff4d4d;">–5 очков</strong></li>
+                        <li>🚫 Вылет без единой победы — <strong style="color: #ff4d4d;">–20 очков</strong></li>
+                    </ul>
+
+                    <div class="rating-divider"></div>
+
+                    <p><strong style="color: #fff;"><i class="fa-solid fa-star" style="color: var(--gold);"></i> Победа над значительно более сильной командой</strong></p>
+                    <p>Если команда побеждает соперников, которые заметно превосходят её по уровню (например, FACEIT 5–6 lvl побеждают FACEIT 9–10 lvl):</p>
+                    <p style="margin-top: 6px;"><strong style="color: var(--accent-green);">☀️ +50 очков</strong></p>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary); margin-top: 8px;">Решение о том, считается ли победа «над значительно более сильной командой», принимается администрацией Nexora League.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: NEWS -->
         <div id="news" class="section-content">
             <!-- БАННЕР ПОДПИСКИ -->
             <div class="subscribe-banner">
@@ -580,10 +686,10 @@
                     <br>
                     <div style="background: rgba(0, 136, 204, 0.05); border: 1px dashed rgba(0, 136, 204, 0.3); padding: 14px; border-radius: 10px;">
                         <strong style="color: #fff; font-size: 0.9rem;">Что вас ждёт в Telegram:</strong>
-                        <ul class="rules-list" style="margin-top: 8px;">
-                            <li>Быстрые анонсы матчей и трансферов.</li>
-                            <li>Инсайды из жизни основного состава и академий.</li>
-                            <li>Общение с игроками и прямое голосование за форматы турниров.</li>
+                        <ul style="list-style: none; padding-left: 0; margin-top: 8px;">
+                            <li style="position: relative; padding-left: 20px; margin-bottom: 6px; color: #d1d5db;"><span style="color: #0088cc; position: absolute; left: 0;">▸</span> Быстрые анонсы матчей и трансферов.</li>
+                            <li style="position: relative; padding-left: 20px; margin-bottom: 6px; color: #d1d5db;"><span style="color: #0088cc; position: absolute; left: 0;">▸</span> Инсайды из жизни основного состава и академий.</li>
+                            <li style="position: relative; padding-left: 20px; color: #d1d5db;"><span style="color: #0088cc; position: absolute; left: 0;">▸</span> Общение с игроками и прямое голосование за форматы турниров.</li>
                         </ul>
                     </div>
                     <br>
@@ -610,7 +716,7 @@
             </div>
         </div>
 
-        <!-- TAB 4: SOCIALS -->
+        <!-- TAB 5: SOCIALS -->
         <div id="socials" class="section-content">
             <div class="socials-grid">
                 <a href="https://t.me/nexora_esports" target="_blank" class="social-card">
@@ -636,6 +742,9 @@
             </div>
         </div>
     </div>
+
+    <!-- WATERMARK -->
+    <div class="watermark">Made by <span>VOID</span></div>
 
     <!-- JAVASCRIPT -->
     <script>
