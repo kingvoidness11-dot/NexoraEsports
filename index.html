@@ -278,7 +278,7 @@
         }
 
         .team-item.open .roster-container {
-            max-height: 1200px;
+            max-height: 600px;
             padding: 24px 20px;
             border-top: 1px solid var(--border-color);
         }
@@ -294,34 +294,6 @@
             align-items: center;
             gap: 8px;
         }
-
-        .roster-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.88rem;
-            background: rgba(204, 255, 0, 0.015);
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-
-        .roster-table th {
-            text-align: left;
-            padding: 10px 14px;
-            color: var(--text-secondary);
-            background: rgba(204, 255, 0, 0.04);
-            font-weight: 700;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-        }
-
-        .roster-table td {
-            padding: 12px 14px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .player-nick { font-weight: 700; color: #fff; }
-        .player-role { color: var(--accent-green); font-weight: 600; font-size: 0.8rem; }
 
         .info-card {
             background: var(--bg-card);
@@ -339,17 +311,36 @@
             transform: translateY(-2px);
         }
 
-        .rules-list { list-style: none; padding-left: 0; }
-        .rules-list li { position: relative; padding-left: 26px; margin-bottom: 12px; }
-        .rules-list li::before {
-            content: "\f054";
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
+        /* RULES STYLING FROM IMAGES */
+        .rules-section-title {
+            font-size: 1.1rem;
+            font-weight: 800;
             color: var(--accent-green);
-            font-size: 0.75rem;
-            position: absolute;
-            left: 0;
-            top: 3px;
+            margin: 20px 0 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .rules-section-title:first-child {
+            margin-top: 0;
+        }
+        .rule-item {
+            margin-bottom: 12px;
+            font-size: 0.92rem;
+            color: #e2e8f0;
+        }
+        .rule-item strong {
+            color: #fff;
+        }
+        .rule-punishment {
+            margin-top: 4px;
+            font-size: 0.86rem;
+            color: var(--text-secondary);
+            padding-left: 16px;
+        }
+        .rule-punishment i {
+            color: #f59e0b;
+            margin-right: 4px;
         }
 
         .system-rules-content p, .system-rules-content ul, .system-rules-content li {
@@ -443,26 +434,22 @@
 
         .social-card i { font-size: 2.8rem; color: var(--accent-green); }
 
-        /* WATERMARK (NEON PURPLE) */
+        /* WATERMARK (TRANSPARENT BG, PURPLE TEXT, LEFT CORNER) */
         .watermark {
             position: fixed;
             bottom: 12px;
-            right: 15px;
+            left: 15px;
             font-size: 0.75rem;
             font-weight: 700;
-            color: #d8b4fe;
-            background: rgba(15, 10, 25, 0.85);
-            padding: 6px 12px;
-            border-radius: 8px;
-            border: 1px solid rgba(168, 85, 247, 0.35);
-            backdrop-filter: blur(6px);
+            color: #c084fc;
+            background: transparent;
+            padding: 4px 8px;
             z-index: 999;
             letter-spacing: 1px;
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.35);
+            text-shadow: 0 0 10px rgba(192, 132, 252, 0.8), 0 0 20px rgba(168, 85, 247, 0.5);
         }
         .watermark span {
-            color: #c084fc;
-            text-shadow: 0 0 10px rgba(192, 132, 252, 0.8), 0 0 20px rgba(168, 85, 247, 0.5);
+            color: #d8b4fe;
         }
     </style>
 </head>
@@ -500,7 +487,7 @@
                     <div></div>
                 </div>
 
-                <!-- RANK 1: NEXORA TEAM (ОСНОВНОЙ СОСТАВ) -->
+                <!-- RANK 1: NEXORA TEAM -->
                 <div class="team-item" onclick="toggleRoster(this)">
                     <div class="team-row">
                         <div class="rank-badge rank-1"><i class="fa-solid fa-trophy"></i> #1</div>
@@ -511,39 +498,7 @@
                         <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
                     </div>
                     <div class="roster-container">
-                        <div class="roster-section-title"><i class="fa-solid fa-users"></i> Основной состав NEXORA TEAM</div>
-                        <table class="roster-table">
-                            <thead>
-                                <tr>
-                                    <th>Игрок</th>
-                                    <th>Возраст</th>
-                                    <th>Страна</th>
-                                    <th>Роль</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td class="player-nick">Pike</td><td>20</td><td>Украина 🇺🇦</td><td class="player-role">Entry</td></tr>
-                                <tr><td class="player-nick">Tur1kxx</td><td>15</td><td>Украина 🇺🇦</td><td class="player-role">Rifler</td></tr>
-                                <tr><td class="player-nick">Void</td><td>15</td><td>Казахстан 🇰🇿</td><td class="player-role">AWP / IGL</td></tr>
-                                <tr><td class="player-nick">maTTe0qq</td><td>15</td><td>Украина 🇺🇦</td><td class="player-role">Lurker</td></tr>
-                                <tr><td class="player-nick">kiyo666</td><td>17</td><td>Россия 🇷🇺</td><td class="player-role">Support</td></tr>
-                            </tbody>
-                        </table>
-
-                        <div class="roster-section-title" style="color: var(--text-secondary); margin-top: 20px;"><i class="fa-solid fa-chair"></i> Скамейка запасных</div>
-                        <table class="roster-table">
-                            <thead>
-                                <tr>
-                                    <th>Игрок</th>
-                                    <th>Возраст</th>
-                                    <th>Страна</th>
-                                    <th>Роль</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td class="player-nick">Zeln</td><td>15</td><td>Украина 🇺🇦</td><td class="player-role">Lurker (Замена)</td></tr>
-                            </tbody>
-                        </table>
+                        <div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Основной состав в процессе анонса</div>
                     </div>
                 </div>
 
@@ -555,7 +510,9 @@
                         <div><span class="status-pill">OPEN</span></div>
                         <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
                     </div>
-                    <div class="roster-container"><div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Состав в процессе анонса</div></div>
+                    <div class="roster-container">
+                        <div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Состав в процессе анонса</div>
+                    </div>
                 </div>
 
                 <!-- RANK 3: ACADEMY 2 -->
@@ -566,7 +523,9 @@
                         <div><span class="status-pill">OPEN</span></div>
                         <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
                     </div>
-                    <div class="roster-container"><div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Состав в процессе анонса</div></div>
+                    <div class="roster-container">
+                        <div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Состав в процессе анонса</div>
+                    </div>
                 </div>
 
                 <!-- RANK 4: ACADEMY 3 -->
@@ -577,7 +536,9 @@
                         <div><span class="status-pill">OPEN</span></div>
                         <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
                     </div>
-                    <div class="roster-container"><div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Состав в процессе анонса</div></div>
+                    <div class="roster-container">
+                        <div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Состав в процессе анонса</div>
+                    </div>
                 </div>
 
                 <!-- RANK 5: ACADEMY 4 -->
@@ -588,21 +549,87 @@
                         <div><span class="status-pill">OPEN</span></div>
                         <div class="chevron"><i class="fa-solid fa-chevron-down"></i></div>
                     </div>
-                    <div class="roster-container"><div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Состав в процессе анонса</div></div>
+                    <div class="roster-container">
+                        <div class="roster-section-title"><i class="fa-solid fa-user-clock"></i> Состав в процессе анонса</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- TAB 2: RULES -->
+        <!-- TAB 2: RULES (UPDATED FROM IMAGES) -->
         <div id="rules" class="section-content">
             <div class="info-card">
-                <h3><i class="fa-solid fa-shield-halved"></i> Правила рейтинга NEXORA LEAGUE</h3>
-                <br>
-                <ul class="rules-list">
-                    <li>Все официальные матчи фиксируются администрацией лиги. За каждую победу команда получает очки рейтинга.</li>
-                    <li>Игроки основного состава обязаны придерживаться дисциплинарного регламента лиги.</li>
-                    <li>Переходы между Академией и Основным составом разрешены только во время трансферных окон.</li>
-                </ul>
+                <div class="rules-section-title">🍀 • Общие положения</div>
+                
+                <div class="rule-item">
+                    <strong>1.1.</strong> Находясь здесь, вы принимаете правила и <a href="https://discord.com/terms" target="_blank" style="color: var(--accent-green); text-decoration: underline;">TOS Discord</a>
+                </div>
+                <div class="rule-item">
+                    <strong>1.2.</strong> Незнание правил не оправдывает их нарушение.
+                </div>
+                <div class="rule-item">
+                    <strong>1.3.</strong> Основной язык — русский. Другие языки — только в ЛС.
+                </div>
+                <div class="rule-item">
+                    <strong>1.4.</strong> Запрещены эротические аватары, оскорбительные ники и теги.
+                    <div class="rule-punishment"><i class="fa-solid fa-hammer"></i> Устное предупреждение, при непослушании блокировка учетной записи на сервере.</div>
+                </div>
+                <div class="rule-item">
+                    <strong>1.5.</strong> Публикация личных данных других лиц (фото, адрес, телефон) запрещена.
+                    <div class="rule-punishment"><i class="fa-solid fa-hammer"></i> Блокировка учетной записи на сервере.</div>
+                </div>
+
+                <div class="rules-section-title" style="margin-top: 25px;">🍀 • Поведение в чатах</div>
+
+                <div class="rule-item">
+                    <strong>2.1.</strong> Запрещен переход на личности, токсичность и агрессия.
+                    <div class="rule-punishment"><i class="fa-solid fa-hammer"></i> Мут от 2 до 24 часов.</div>
+                </div>
+                <div class="rule-item">
+                    <strong>2.2.</strong> Запрещена отправка 3+ однотипных сообщений, капс и злоупотребление эмодзи.
+                    <div class="rule-punishment"><i class="fa-solid fa-hammer"></i> Мут от 30 минут до 2 часов.</div>
+                </div>
+                <div class="rule-item">
+                    <strong>2.3.</strong> Ссылки на другие серверы, товары или услуги без разрешения.
+                    <div class="rule-punishment"><i class="fa-solid fa-hammer"></i> Блокировка учетной записи на сервере.</div>
+                </div>
+                <div class="rule-item">
+                    <strong>2.4.</strong> Публикация контента 18+, сцен насилия или жестокости.
+                    <div class="rule-punishment"><i class="fa-solid fa-hammer"></i> Устное предупреждение, при непослушании блокировка учетной записи на сервере.</div>
+                </div>
+                <div class="rule-item">
+                    <strong>2.5.</strong> Дискриминация по расе, религии, гендеру или политике.
+                </div>
+                <div class="rule-item">
+                    <strong>2.6.</strong> Намеренное создание конфликтных ситуаций и троллинг.
+                    <div class="rule-punishment"><i class="fa-solid fa-hammer"></i> Мут от 30 минут до 6 часов.</div>
+                </div>
+
+                <div class="rules-section-title" style="margin-top: 25px;">🍀 • Наказания и рецидивы</div>
+                <div class="rule-item" style="color: var(--text-secondary);">
+                    Модерация использует систему прогрессивных наказаний:<br>
+                    • <strong style="color:#fff;">Mute (Мут):</strong> Ограничение права писать в чаты и говорить в каналах.<br>
+                    • <strong style="color:#fff;">Kick (Кик):</strong> Исключение с сервера. Вы можете вернуться по новой ссылке.<br>
+                    • <strong style="color:#fff;">Ban (Бан):</strong> Полная блокировка доступа к серверу (временная или перманентная).
+                </div>
+                <div class="rule-item" style="margin-top: 10px;">
+                    <strong>Рецидив:</strong> Повторное нарушение после мута/устного предупреждения ведет к удвоению срока наказания. Обход бана через твинки — перманентная блокировка учетной записи на сервере.
+                </div>
+
+                <div class="rules-section-title" style="margin-top: 25px;">🍀 • Права и модерация</div>
+                <div class="rule-item">
+                    <strong>4.1.</strong> Модератор вправе выдать наказание, не описанное здесь, если действие вредит серверу.
+                </div>
+                <div class="rule-item">
+                    <strong>4.2.</strong> Запрещено упоминать администрацию без срочного вопроса.
+                    <div class="rule-punishment"><i class="fa-solid fa-hammer"></i> Устное предупреждение, при непослушании мут от 2 до 4 часов.</div>
+                </div>
+                <div class="rule-item">
+                    <strong>4.3.</strong> Вы имеете право обжаловать мут в течение 24 часов в ЛС модератору. Публичное обсуждение действий модерации в общих чатах — мут от 2 до 4 часов.
+                </div>
+                <div class="rule-item">
+                    <strong>4.4.</strong> Вы имеете право написать жалобу на пользователя в раздел 📝 • жалобы, если он сделал то что нарушает правила сервера или ваши права (будет произведен суд)
+                </div>
             </div>
         </div>
 
