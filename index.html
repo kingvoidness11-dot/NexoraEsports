@@ -63,6 +63,31 @@
             background-attachment: fixed;
         }
 
+        /* BREATHING LOGO WATERMARK BACKGROUND */
+        .bg-logo-watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: min(45vw, 45vh);
+            color: rgba(204, 255, 0, 0.035);
+            z-index: 0;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: logoBreath 6s ease-in-out infinite;
+        }
+
+        .bg-logo-watermark i {
+            filter: drop-shadow(0 0 40px rgba(204, 255, 0, 0.05));
+        }
+
+        @keyframes logoBreath {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+            50% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; }
+        }
+
         header {
             background: rgba(8, 12, 8, 0.85);
             backdrop-filter: blur(16px);
@@ -311,7 +336,7 @@
             transform: translateY(-2px);
         }
 
-        /* RULES STYLING FROM IMAGES */
+        /* RULES STYLING */
         .rules-section-title {
             font-size: 1.1rem;
             font-weight: 800;
@@ -455,6 +480,11 @@
 </head>
 <body>
 
+    <!-- BACKGROUND BREATHING LOGO WATERMARK -->
+    <div class="bg-logo-watermark">
+        <i class="fa-solid fa-staff-snake"></i>
+    </div>
+
     <!-- HEADER NAVIGATION -->
     <header>
         <div class="nav-container">
@@ -556,7 +586,7 @@
             </div>
         </div>
 
-        <!-- TAB 2: RULES (UPDATED FROM IMAGES) -->
+        <!-- TAB 2: RULES -->
         <div id="rules" class="section-content">
             <div class="info-card">
                 <div class="rules-section-title">🍀 • Общие положения</div>
